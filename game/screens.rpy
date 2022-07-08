@@ -35,6 +35,7 @@ style button_text is gui_text:
 
 style label_text is gui_text:
     properties gui.text_properties("label", accent=True)
+    size 60
 
 style prompt_text is gui_text:
     properties gui.text_properties("prompt")
@@ -290,8 +291,13 @@ screen navigation():
     vbox:
         style_prefix "navigation"
 
-        xalign 0.5
-        yalign 0.5
+        if renpy.get_screen("main_menu"):
+            xalign 0.5
+            yalign 0.8
+        else:
+            xoffset 60
+            yalign 0.5
+
 
         spacing gui.navigation_spacing
 
@@ -299,7 +305,9 @@ screen navigation():
 
             textbutton _("Start") action Start()
 
+
         else:
+
 
             textbutton _("History") action ShowMenu("history")
 
@@ -568,7 +576,7 @@ style about_label_text is gui_label_text
 style about_text is gui_text
 
 style about_label_text:
-    size gui.label_text_size
+    size 40
 
 
 ## Load and Save screens #######################################################
@@ -700,6 +708,7 @@ style slot_button:
 
 style slot_button_text:
     properties gui.button_text_properties("slot_button")
+    size 50
 
 
 ## Preferences screen ##########################################################
@@ -1108,9 +1117,10 @@ style help_label:
     right_padding 30
 
 style help_label_text:
-    size gui.text_size
+    size 50
     xalign 1.0
     text_align 1.0
+
 
 
 

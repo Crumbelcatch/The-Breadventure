@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/screens.rpy", line 343: style property xaling is not known.
-    xaling 0.5
-          ^
+File "game/screens.rpy", line 1123: style property size appears twice.
+    size 50
+        ^
 
 Ren'Py Version: Ren'Py 8.0.0.22062402
-Fri Jul  8 19:45:52 2022
+Fri Jul  8 21:41:45 2022
