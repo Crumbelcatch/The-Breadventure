@@ -249,14 +249,14 @@ screen quick_menu():
             xalign 0.5
             yalign 1.0
 
-            textbutton _("Zurück") action Rollback()
+            textbutton _("Back") action Rollback()
             textbutton _("History") action ShowMenu('history')
-            textbutton _("Spulen") action Skip() alternate Skip(fast=True, confirm=True)
+            textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
             textbutton _("Auto") action Preference("auto-forward", "toggle")
-            textbutton _("Speichern") action ShowMenu('save')
-            textbutton _("S.Speichern") action QuickSave()
-            textbutton _("S. Laden") action QuickLoad()
-            textbutton _("Optionen") action ShowMenu('preferences')
+            textbutton _("Save") action ShowMenu('save')
+            textbutton _("Q.Save") action QuickSave()
+            textbutton _("Q.Load") action QuickLoad()
+            textbutton _("Prefs") action ShowMenu('preferences')
 
 
 ## This code ensures that the quick_menu screen is displayed in-game, whenever
@@ -290,7 +290,7 @@ screen navigation():
     vbox:
         style_prefix "navigation"
 
-        xpos gui.navigation_xpos
+        xalign 0.5
         yalign 0.5
 
         spacing gui.navigation_spacing
@@ -303,11 +303,11 @@ screen navigation():
 
             textbutton _("History") action ShowMenu("history")
 
-            textbutton _("Speichern") action ShowMenu("save")
+            textbutton _("Save") action ShowMenu("save")
 
         textbutton _("Load") action ShowMenu("load")
 
-        textbutton _("Einstellungen") action ShowMenu("preferences")
+        textbutton _("Preferences") action ShowMenu("preferences")
 
         if _in_replay:
 
@@ -315,20 +315,20 @@ screen navigation():
 
         elif not main_menu:
 
-            textbutton _("Hauptmenü") action MainMenu()
+            textbutton _("Main Menu") action MainMenu()
 
-        textbutton _("Über") action ShowMenu("about")
+        textbutton _("About") action ShowMenu("about")
 
         if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
 
             ## Help isn't necessary or relevant to mobile devices.
-            textbutton _("Hilfe") action ShowMenu("help")
+            textbutton _("Help") action ShowMenu("help")
 
         if renpy.variant("pc"):
 
             ## The quit button is banned on iOS and unnecessary on Android and
             ## Web.
-            textbutton _("Beenden") action Quit(confirm=not main_menu)
+            textbutton _("Quit") action Quit(confirm=not main_menu)
 
 
 style navigation_button is gui_button
@@ -340,6 +340,7 @@ style navigation_button:
 
 style navigation_button_text:
     properties gui.button_text_properties("navigation_button")
+    xalign 0.5
 
 
 ## Main Menu screen ############################################################
@@ -385,7 +386,7 @@ style main_menu_frame:
     xsize 420
     yfill True
 
-    background "gui/overlay/main_menu.png"
+    #background "gui/overlay/main_menu.png"
 
 style main_menu_vbox:
     xalign 1.0
@@ -469,7 +470,7 @@ screen game_menu(title, scroll=None, yinitial=0.0):
 
     use navigation
 
-    textbutton _("Zurück"):
+    textbutton _("Return"):
         style "return_button"
 
         action Return()
@@ -546,7 +547,7 @@ screen about():
     ## This use statement includes the game_menu screen inside this one. The
     ## vbox child is then included inside the viewport inside the game_menu
     ## screen.
-    use game_menu(_("Über"), scroll="viewport"):
+    use game_menu(_("About"), scroll="viewport"):
 
         style_prefix "about"
 
@@ -583,7 +584,7 @@ screen save():
 
     tag menu
 
-    use file_slots(_("Speichern"))
+    use file_slots(_("Save"))
 
 
 screen load():
@@ -712,7 +713,7 @@ screen preferences():
 
     tag menu
 
-    use game_menu(_("Einstellungen"), scroll="viewport"):
+    use game_menu(_("Preferences"), scroll="viewport"):
 
         vbox:
 
@@ -723,16 +724,16 @@ screen preferences():
 
                     vbox:
                         style_prefix "radio"
-                        label _("Anzeige")
-                        textbutton _("Fenster") action Preference("display", "window")
-                        textbutton _("Vollbild") action Preference("display", "fullscreen")
+                        label _("Display")
+                        textbutton _("Window") action Preference("display", "window")
+                        textbutton _("Fullscreen") action Preference("display", "fullscreen")
 
                 vbox:
                     style_prefix "check"
-                    label _("Spulen")
+                    label _("Skip")
                     textbutton _("Unseen Text") action Preference("skip", "toggle")
-                    textbutton _("Nach Auswahl") action Preference("after choices", "toggle")
-                    textbutton _("Übergänge") action InvertSelected(Preference("transitions", "toggle"))
+                    textbutton _("After Choices") action Preference("after choices", "toggle")
+                    textbutton _("Transitions") action InvertSelected(Preference("transitions", "toggle"))
 
                 ## Additional vboxes of type "radio_pref" or "check_pref" can be
                 ## added here, to add additional creator-defined preferences.
@@ -745,25 +746,25 @@ screen preferences():
 
                 vbox:
 
-                    label _("Textgeschwindigkeit")
+                    label _("Text Speed")
 
                     bar value Preference("text speed")
 
-                    label _("Automatischer Vorlauf")
+                    label _("Auto-Forward Time")
 
                     bar value Preference("auto-forward time")
 
                 vbox:
 
                     if config.has_music:
-                        label _("Musiklautstärke")
+                        label _("Music Volume")
 
                         hbox:
                             bar value Preference("music volume")
 
                     if config.has_sound:
 
-                        label _("Soundlautstärke")
+                        label _("Sound Volume")
 
                         hbox:
                             bar value Preference("sound volume")
@@ -773,7 +774,7 @@ screen preferences():
 
 
                     if config.has_voice:
-                        label _("Sprachlautstärke")
+                        label _("Voice Volume")
 
                         hbox:
                             bar value Preference("voice volume")
@@ -962,7 +963,7 @@ screen help():
 
     default device = "keyboard"
 
-    use game_menu(_("Hilfe"), scroll="viewport"):
+    use game_menu(_("Help"), scroll="viewport"):
 
         style_prefix "help"
 
@@ -1151,8 +1152,8 @@ screen confirm(message, yes_action, no_action):
                 xalign 0.5
                 spacing 150
 
-                textbutton _("Ja") action yes_action
-                textbutton _("Nein") action no_action
+                textbutton _("Yes") action yes_action
+                textbutton _("No") action no_action
 
     ## Right-click and escape answer "no".
     key "game_menu" action no_action
@@ -1418,8 +1419,8 @@ screen quick_menu():
             xalign 0.5
             yalign 1.0
 
-            textbutton _("Zurück") action Rollback()
-            textbutton _("Spulen") action Skip() alternate Skip(fast=True, confirm=True)
+            textbutton _("Back") action Rollback()
+            textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
             textbutton _("Auto") action Preference("auto-forward", "toggle")
             textbutton _("Menu") action ShowMenu()
 
