@@ -3,11 +3,12 @@
 # name of the character.
 
 define m = Character(_("You"), color="#EAEAEA")
-define h = Character(_("Tophat"), color="#EAEAEA")
-define b = Character(_("Bow"), color="#EAEAEA")
-define c = Character(_("Cone"), color="#EAEAEA")
+define h = Character(_("Tophat"), color="#6f256a")
+define b = Character(_("Bow"), color="#144694")
+define c = Character(_("Cone"), color="#2cb700")
+define f = Character(_("Cone's Friends"), color="#176000")
 
-define d = Character(_("Breadeamon"), color="#e50004")
+define d = Character(_("Breademon"), color="#e50004")
 
 define SPR_turnout = [("Scissors", "Paper"), ("Paper", "Rock"), ("Rock", "Scissors")]
 
@@ -29,7 +30,6 @@ label start:
 
 
 label evalSPR:
-
 
     if (playerChoice, deamonChoice) in SPR_turnout:
 
@@ -82,6 +82,27 @@ label playSPR:
 
     jump evalSPR
 
+
+label endingRoomemate:
+
+    scene bg_roommateEnding
+
+    m "OMG, they were roommates"
+
+    "This is the roommates ending."
+
+    return
+
+
+label endingNeutral:
+
+    scene bg_neutralEnding
+
+    m "¯\_(ツ)_/¯"
+
+    "This is the neutral ending."
+
+    return
 
 
 label endingBad:
