@@ -1,33 +1,106 @@
-﻿# The script of the game goes in this file.
 
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
-define e = Character("Eileen")
+define m = Character(_("You"), color="#EAEAEA")
+define h = Character(_("Tophat"), color="#EAEAEA")
+define b = Character(_("Bow"), color="#EAEAEA")
+define c = Character(_("Cone"), color="#EAEAEA")
+
+define d = Character(_("Breadeamon"), color="#e50004")
+
+define SPR_turnout = [("Scissors", "Paper"), ("Paper", "Rock"), ("Rock", "Scissors")]
+
 
 
 # The game starts here.
-
 label start:
 
-    # Show a background. This uses a placeholder by default, but you can
-    # add a file (named either "bg room.png" or "bg room.jpg") to the
-    # images directory to show it.
+    scene bg lecturehall
 
-    scene bg room
+    "test... TEST"
 
-    # This shows a character sprite. A placeholder is used, but you can
-    # replace it by adding a file named "eileen happy.png" to the images
-    # directory.
+    $winsDeamon = 0
+    $winsPlayer = 0
 
-    show eileen happy
+    m "Lets play scissors, paper, rock! I choose:"
 
-    # These display lines of dialogue.
+    jump playSPR
 
-    e "You've created a new Ren'Py game."
 
-    e "Once you add a story, pictures, and music, you can release it to the world!"
+label evalSPR:
 
-    # This ends the game.
+
+    if (playerChoice, deamonChoice) in SPR_turnout:
+
+        m "This Round goes to me!"
+
+        $ winsPlayer = winsPlayer + 1
+
+    elif (deamonChoice, playerChoice) in SPR_turnout:
+
+        d "This one ges to me!"
+
+        $ winsDeamon = winsDeamon + 1
+
+    else:
+
+        d "It's a tie!"
+
+        m "Let's go again."
+
+
+    if winsPlayer == 2:
+
+        jump endingGood
+
+
+    if winsDeamon == 2:
+
+        jump endingBad
+
+    jump playSPR
+
+
+
+label playSPR:
+
+    menu:
+
+        m "I choose:"
+
+        "Scissors":
+            $ playerChoice = "Scissors"
+        "Paper":
+            $ playerChoice = "Paper"
+        "Rock":
+            $ playerChoice = "Rock"
+
+    $ deamonChoice = renpy.random.choice(["Scissors", "Paper", "Rock"])
+
+    d "I choose %(deamonChoice)s"
+
+    jump evalSPR
+
+
+
+label endingBad:
+
+    scene bg_badEnding
+
+    m "Aw hell naw..."
+
+    "This is the bad ending."
+
+    return
+
+
+label endingGood:
+
+    scene bg_goodEnding
+
+    m "That was close..."
+
+    "This is the good ending."
 
     return
