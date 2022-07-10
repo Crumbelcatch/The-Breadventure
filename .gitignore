@@ -118,5 +118,6 @@ CubismSdkForNative-4-*.zip
 # Old files.
 /0old
 
+game/saves/*.save
 # Works in progress, throwaway scripts, etc.
 /scratch
