@@ -12,7 +12,7 @@
 ##
 ## The _() surrounding the string marks it as eligible for translation.
 
-define config.name = _("Creative_Coding_Pruefung")
+define config.name = _("The Breadventure")
 
 
 ## Determines if the title given above is shown on the main menu screen. Set
@@ -37,7 +37,7 @@ define gui.about = _p("""
 ## distribution. This must be ASCII-only, and must not contain spaces, colons,
 ## or semicolons.
 
-define build.name = "Creative_Coding_Pruefung"
+define build.name = "The Breadventure"
 
 
 ## Sounds and music ############################################################

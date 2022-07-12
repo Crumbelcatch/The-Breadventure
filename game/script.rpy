@@ -1,12 +1,18 @@
 
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
+init python:
+    style.say_who_windowGray = Style ('say_who_window')
+    style.say_who_windowGray.background = "#000000"
 
-define m = Character(_("You"), color="#EAEAEA")
+
+define m = Character(_("You"), color="#EAEAEA", what_color="#ffffff", window_background="gui/Custom__Name_Toast.png", window_ypos=0.5, window_xpos=0.5, window_bg_height=500, window_width=500)
 define h = Character(_("Tophat"), color="#6f256a")
 define b = Character(_("Bow"), color="#144694")
 define c = Character(_("Cone"), color="#2cb700")
 define f = Character(_("Cone's Friends"), color="#176000")
+
+define r = Character(_("Everyone"), color="#6f256a")
 
 define d = Character(_("Breademon"), color="#e50004")
 
@@ -17,9 +23,13 @@ define SPR_turnout = [("Scissors", "Paper"), ("Paper", "Rock"), ("Rock", "Scisso
 # The game starts here.
 label start:
 
+
+    jump endingDeamonWin
+
+
     scene bg lecturehall
 
-    "test... TEST"
+    r "test... TEST"
 
     $winsDeamon = 0
     $winsPlayer = 0
@@ -57,10 +67,9 @@ label evalSPR:
 
     if winsDeamon == 2:
 
-        jump endingBad
+        jump endingDeamonWin
 
     jump playSPR
-
 
 
 label playSPR:
@@ -94,24 +103,52 @@ label endingRoomemate:
     return
 
 
-label endingNeutral:
+label endingMcWin:
 
-    scene bg_neutralEnding
+    scene bg_McWinEnding
 
-    m "¯\_(ツ)_/¯"
 
-    "This is the neutral ending."
 
     return
 
 
-label endingBad:
+label endingDeamonWin:
 
     scene bg_badEnding
 
-    m "Aw hell naw..."
+    show hugo nervoes at right
 
-    "This is the bad ending."
+    c "Oh my gosh guys, I think they're coming back!"
+
+    hide hugo
+
+    show jerry neutral at right
+
+    h "Quick, get them a glass of water!"
+
+    show hugo neutral at right
+
+    "Hugo storms off into the kitchen."
+
+    b "Can you hear me??"
+
+    m "Loud and clear!"
+
+    c "Here you go, careful don't choke."
+
+    m "Thanks, pal!"
+
+    c "...Pal? You've never called me that before."
+
+    m "Oh really? Why not...we're friends aren't we?"
+
+    b "You've never said that to anyone..."
+
+    h "Guys, I think we should let them rest, they look like they need it desperately. But good job everyone."
+
+    m "Actually, I only need all the bread you currently have in this house."
+
+    r "What?"
 
     return
 
