@@ -142,19 +142,22 @@ style window:
 style namebox:
     xpos gui.name_xpos
     xanchor gui.name_xalign
-    xsize gui.namebox_width
-    ypos gui.name_ypos
-    ysize gui.namebox_height
+    xsize 300
+    ypos -100
+    ysize 150
 
     background Frame("gui/namebox.png", gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.name_xalign)
 
 
     padding gui.namebox_borders.padding
 
+
 style say_label:
     properties gui.text_properties("name", accent=True)
-    xalign gui.name_xalign
-    yalign 0.5
+    xalign 0.45
+    yalign 0.85
+    font 'fonts/212 Queenie Sans.ttf'
+    size 80
 
 style say_dialogue:
     properties gui.text_properties("dialogue")
@@ -277,7 +280,7 @@ style quick_button:
 
 style quick_button_text:
     properties gui.button_text_properties("quick_button")
-
+    size 35
 
 ################################################################################
 ## Main and Game Menu Screens

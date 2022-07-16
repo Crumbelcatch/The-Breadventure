@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 15: positional argument follows keyword argument
-    Character(_("Everyone"), color="#6f256a", "#144694")
-                                                        ^
+File "game/script.rpy", line 13: positional argument follows keyword argument
+    Character(("Hugo's Friends"), color="#000000", gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.name_xalign))
+                                                                                                                      ^
 
 Ren'Py Version: Ren'Py 8.0.0.22062402
-Mon Jul 11 20:26:12 2022
+Sat Jul 16 20:35:28 2022
